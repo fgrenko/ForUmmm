@@ -1,6 +1,3 @@
-<?php
-session_start(); ?>
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -11,9 +8,6 @@ session_start(); ?>
     <link rel="stylesheet" type="text/css" href="./assets/css/header.css">
     <link rel="stylesheet" href="./assets/css/styles.css">
     <script type="text/javascript">
-    function signup(){
-      window.location.replace("signup.php");
-    }
     function home(){
       window.location.replace("index.php");
     }
@@ -28,9 +22,6 @@ session_start(); ?>
     }
     function skola(){
       window.location.replace("skola.php");
-    }
-    function login(){
-      window.location.replace("login.php");
     }
 
     </script>
@@ -49,15 +40,7 @@ session_start(); ?>
                <li><a href="#" onclick="home();">Home</a></li>
                <li><a href="#">About</a></li>
                <li><a href="#">Search</a></li>
-               <?php
-               if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-                 echo "<li><a href='#' onclick='signup();'>Sign Up</a></li>
-                 <li><a href='#' onclick='login();''>Log In</a></li>';";
-               }else {
-                 echo "<li><a href='logout.php'>Log Out</a></li>";
-               }
-
-                ?>
+               <li><a href="#">Sign In</a></li>
 
           </ul>
      </nav>
