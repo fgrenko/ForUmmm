@@ -1,3 +1,6 @@
+<?php
+session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -7,6 +10,30 @@
 
     <link rel="stylesheet" type="text/css" href="./assets/css/header.css">
     <link rel="stylesheet" href="./assets/css/styles.css">
+    <script type="text/javascript">
+    function signup(){
+      window.location.replace("signup.php");
+    }
+    function home(){
+      window.location.replace("index.php");
+    }
+    function politika(){
+      window.location.replace("politika.php");
+    }
+    function sport(){
+        window.location.replace("sport.php");
+    }
+    function svakodnevni_zivot(){
+      window.location.replace("svakodnevni_zivot.php");
+    }
+    function skola(){
+      window.location.replace("skola.php");
+    }
+    function login(){
+      window.location.replace("login.php");
+    }
+
+    </script>
 
     <title>ForUmmm</title>
 </head>
@@ -15,13 +42,23 @@
 
 <body>
 <header>
-     <h1 class="logo">ForUmmm</h1>
+     <a href="#" onclick="home();" style="color:black;">   <h1 class="logo">ForUmmm</h1> </a>
      <input type="checkbox" id="nav-toggle" class="nav-toggle">
      <nav>
           <ul>
-               <li><a href="#">Home</a></li>
+               <li><a href="#" onclick="home();">Home</a></li>
                <li><a href="#">About</a></li>
-               <li><a href="#">Sign In</a></li>
+               <li><a href="#">Search</a></li>
+               <?php
+               if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+                 echo "<li><a href='#' onclick='signup();'>Sign Up</a></li>
+                 <li><a href='#' onclick='login();''>Log In</a></li>';";
+               }else {
+                 echo "<li><a href='logout.php'>Log Out</a></li>";
+               }
+
+                ?>
+
           </ul>
      </nav>
      <label for="nav-toggle" class="nav-toggle-label">
@@ -51,6 +88,13 @@
                    <div class="main_content">
                        <div class="f_title">
                             <h1>Dobrodošli na ForUmmm</h1>
+                            <h2>Kategorije:</h2>
+                            <ul>
+                              <li><a href="#" class="naslovi" onclick="politika();">Politika</a></li>
+                              <li><a href="#" class="naslovi" onclick="sport()">Sport</a></li>
+                              <li><a href="#" class="naslovi" onclick="svakodnevni_zivot();">Svakodnevni život</a></li>
+                              <li><a href="#" class="naslovi" onclick="skola();">Škola</a></li>
+                            </ul>
                       </div>
                       <!-- forum layout starts here -->
                       <!-- if its okay w you  -->
