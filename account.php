@@ -1,3 +1,6 @@
+<?php
+session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -8,13 +11,27 @@
     <link rel="stylesheet" type="text/css" href="./assets/css/header.css">
     <link rel="stylesheet" href="./assets/css/styles.css">
     <script type="text/javascript">
+    function signup(){
+      window.location.replace("signup.php");
+    }
     function home(){
       window.location.replace("index.php");
     }
     function politika(){
       window.location.replace("politika.php");
     }
-
+    function sport(){
+        window.location.replace("sport.php");
+    }
+    function svakodnevni_zivot(){
+      window.location.replace("svakodnevni_zivot.php");
+    }
+    function skola(){
+      window.location.replace("skola.php");
+    }
+    function login(){
+      window.location.replace("login.php");
+    }
 
     </script>
 
@@ -32,7 +49,7 @@
                <li><a href="#" onclick="home();">Home</a></li>
                <li><a href="#">About</a></li>
                <li><a href="#">Search</a></li>
-               <li><a href="#">Sign In</a></li>
+               
 
           </ul>
      </nav>
@@ -50,7 +67,7 @@
               <div class="content_header">
                   <!-- questionable class name?? -->
                   <div class="current_page">
-                       <a  href="#"><h1>Politika</h1></a>
+                       <a  href="#"><h1><?php echo $_SESSION['username']; ?></h1></a>
                        <!-- after entering any page, display that same page; e.g. ForUmmm > News > World > ..... -->
                        <!-- look up "dl" tag for html on google -->
                   </div>
@@ -61,15 +78,14 @@
              </div>
               <div class="f_content">
                    <div class="main_content">
-                     <?php
-                     require 'includes/dbconnect.inc.php';
-                     $query = "SELECT naslov,id FROM politika";
+                     <table>
+                       <tr>
+                         <td><h2>Moja pitanja i komentari</h2></td>
+                       </tr>
+                       <?php
 
-                     $result = mysqli_query($conn, $query);
-                     while ($row = $result->fetch_assoc()) {
-                       echo "<a href='pitanje.php?category=politika&id=".$row['id']."'>".$row['naslov']."</a>  <br>";
-                     }
-                      ?>
+                       ?>
+                     </table>
                        <div class="f_title">
 
                       </div>

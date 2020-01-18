@@ -13,6 +13,11 @@
      <link rel="stylesheet" type="text/css" href="./assets/css/header.css">
      <link rel="stylesheet" href="./assets/css/styles.css">
      <script type="text/javascript">
+     function home(){
+       window.location.replace("index.php");
+     }
+
+
 
      </script>
 
@@ -30,7 +35,7 @@
                 <li><a href="#" onclick="home();">Home</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Search</a></li>
-                <li><a href="#">Sign In</a></li>
+                <li><a href='logout.php'>Log Out</a></li>
 
            </ul>
       </nav>
@@ -68,7 +73,7 @@
                         <select  name="kategorija">
                           <option value="politika">Politika</option>
                           <option value="sport">Sport</option>
-                          <option value="svak_zivot">Svakodnevni život</option>
+                          <option value="svakodnevni_zivot">Svakodnevni život</option>
                           <option value="skola">Škola</option>
                         </select>
                         <input type="submit" name="post-submit" value="Objavi">

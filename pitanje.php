@@ -58,6 +58,7 @@
               <div class="f_content">
                    <div class="main_content">
                      <?php
+                     error_reporting(0);
                      session_start();
                      require 'includes/dbconnect.inc.php';
                      $id = $_GET['id'];
@@ -76,7 +77,10 @@
                      }
                      echo "</table><hr>";
 
-                     if($_SESSION['loggedin'] == true){
+                     if($_SESSION['loggedin'] !== true){
+                       echo "Prijavi se da bi mogao komentirati";
+
+                     }else{
                        echo "<form action='includes/komentar.inc.php' method='post'>";
                        echo "<textarea name='komentar' rows='5' cols='80'></textarea> <br>";
                        echo "<input type='submit' name='komentar-submit' value='Komentiraj'>";
@@ -84,8 +88,6 @@
                        echo "<input type='hidden' name='kategorija' value=".$category.">";
                        echo "</form>";
 
-                     }else{
-                       echo "Prijavi se da bi mogao komentirati";
                      }
 
 

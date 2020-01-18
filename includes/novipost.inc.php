@@ -13,18 +13,18 @@ if(isset($_POST['post-submit'])){
   header("Location: ../index.php?error=emptyfields");
   exit();
   }
-  else if($kategorija == "politika"){
-    $sql = "INSERT INTO politika(naslov,post,username) VALUES(?,?,?)";
+    $sql = "INSERT INTO $kategorija(naslov,post,username) VALUES(?,?,?)";
     if($stmt = mysqli_prepare($conn,$sql)){
       mysqli_stmt_bind_param($stmt,"sss",$naslov,$post,$username);
       if(mysqli_stmt_execute($stmt)){
         echo "Vaše pitanje je postavljeno";
-        header("location: ../index.php?good");
+        header("location: ../kategorija.php?category=".$kategorija);
       }else {
         echo "Nešto je pošlo po zlu";
       }
   }
-}
+
+
 }
 
 else {

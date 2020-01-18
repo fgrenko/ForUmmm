@@ -1,3 +1,12 @@
+<?php
+$category = $_GET['category'];
+$display_category = ucfirst($category);
+$display_category= str_replace('_',' ',$display_category);
+$display_category=str_replace('zivot','život',$display_category );
+$display_category=str_replace('Skola', 'Škola',$display_category);
+?>
+
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -50,7 +59,7 @@
               <div class="content_header">
                   <!-- questionable class name?? -->
                   <div class="current_page">
-                       <a  href="#"><h1>Politika</h1></a>
+                       <a  href="#"><h1><?php echo $display_category; ?></h1></a>
                        <!-- after entering any page, display that same page; e.g. ForUmmm > News > World > ..... -->
                        <!-- look up "dl" tag for html on google -->
                   </div>
@@ -63,11 +72,11 @@
                    <div class="main_content">
                      <?php
                      require 'includes/dbconnect.inc.php';
-                     $query = "SELECT naslov,id FROM politika";
+                     $query = "SELECT naslov,id FROM $category";
 
                      $result = mysqli_query($conn, $query);
                      while ($row = $result->fetch_assoc()) {
-                       echo "<a href='pitanje.php?category=politika&id=".$row['id']."'>".$row['naslov']."</a>  <br>";
+                       echo "<a href='pitanje.php?category=".$category."&id=".$row['id']."'>".$row['naslov']."</a>  <br>";
                      }
                       ?>
                        <div class="f_title">

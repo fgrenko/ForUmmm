@@ -19,16 +19,16 @@ session_start();
       window.location.replace("index.php");
     }
     function politika(){
-      window.location.replace("politika.php");
+      window.location.replace("kategorija.php?category=politika");
     }
     function sport(){
-        window.location.replace("sport.php");
+        window.location.replace("kategorija.php?category=sport");
     }
     function svakodnevni_zivot(){
-      window.location.replace("svakodnevni_zivot.php");
+      window.location.replace("kategorija.php?category=svakodnevni_zivot");
     }
     function skola(){
-      window.location.replace("skola.php");
+      window.location.replace("kategorija.php?category=skola");
     }
     function login(){
       window.location.replace("login.php");
@@ -50,14 +50,17 @@ session_start();
                <li><a href="#" onclick="home();">Home</a></li>
                <li><a href="#">About</a></li>
                <li><a href="#">Search</a></li>
+
                <?php
                if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                  echo "<li><a href='#' onclick='signup();'>Sign Up</a></li>
                  <li><a href='#' onclick='login();'>Log In</a></li>";
                }else {
-                 $username = $_SESSION["username"]; 
-                 echo "<li><a href='logout.php'>Log Out</a></li>";
+                 $username = $_SESSION["username"];
+
                  echo "<li>Dobrodošli, ".$username;
+                 echo "<li><a href='account.php'>Moj Profil</a> ";
+                 echo "<li><a href='logout.php'>Log Out</a></li>";
                }
 
 
@@ -103,6 +106,7 @@ session_start();
                               <li><a href="#" class="naslovi" onclick="sport()">Sport</a></li>
                               <li><a href="#" class="naslovi" onclick="svakodnevni_zivot();">Svakodnevni život</a></li>
                               <li><a href="#" class="naslovi" onclick="skola();">Škola</a></li>
+
                             </ul>
                       </div>
                       <!-- forum layout starts here -->
