@@ -77,3 +77,9 @@ body {
 .f_title h1{
      margin: 0px;
 }
+
+
+.naslovi {
+    font-size: large;
+    font-weight: bolder;
+}
