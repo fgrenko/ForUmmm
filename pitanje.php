@@ -1,6 +1,5 @@
 
 
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -63,11 +62,40 @@
                      require 'includes/dbconnect.inc.php';
                      $id = $_GET['id'];
                      $category = $_GET['category'];
+                     $premjesti= $_GET['premjesti'];
+
+                     if($premjesti == 1){
+                       echo "Premjesti pitanje u kategoriju:";
+                       echo "<form action='includes/premjesti.inc.php' method='post'>";
+                       echo "<select name='premjestikateg'>";
+                       echo "<option value='politika'>Politika</option>";
+                       echo "<option value='sport'>Sport</option>";
+                       echo "<option value='svakodnevni_zivot'>Svakodnevni život</option>";
+                       echo "<option value='skola'>Škola</option>";
+                       echo "</select>          ";
+                       echo "<input type='submit' name='premjesti-submit' value='Premjesti'>";
+                       echo "<input type='hidden' name='id' value='".$id."'>";
+                       echo "<input type='hidden' name='category' value=".$category.">";
+                       echo "</form>";
+
+                     }
 
                      $sql = "SELECT naslov,post,username,date_time FROM $category WHERE id =$id";
                      $result = mysqli_query($conn, $sql);
                      $row = mysqli_fetch_array($result);
                      echo "<h1>".$row['naslov']."</h1>";
+                     if ($_SESSION['adminloggedin']== true && $premjesti != 1) {
+                       echo "<form action='includes/prem.inc.php' method='post'>";
+                       echo "<input type='hidden' name='id' value='".$id."'>";
+                       echo "<input type='hidden' name='category' value=".$category.">";
+                       echo "<input type='submit' name='premjesti' value='Premjesti pitanje'></form>";
+                       echo "<form action='includes/izbrisi.inc.php' method='post'>";
+                       echo "<input type='hidden' name='id' value=".$id.">";
+                       echo "<input type='hidden' name='category' value=".$category.">";
+                       echo "<input type='submit' name='izbrisi' value='Izbrisi pitanje'></form>";
+                     }
+
+                     if($premjesti !== 1){
                      echo "<table><tr><td style='background-color: grey;font-weight:bold;'><div>".$row['post']."</div><br><br><div align=right>Posted by user: <i>".$row['username']." </i><em>,  ".$row['date_time']."</em> </div></td> </tr>";
                      $query="SELECT post,username,date_time,id,komentar,postId FROM $category WHERE postId=$id && komentar = 'true'";
                      $result = mysqli_query($conn,$query);
@@ -89,6 +117,7 @@
                        echo "</form>";
 
                      }
+                   }
 
 
 

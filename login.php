@@ -55,11 +55,19 @@
              </div>
               <div class="f_content">
                    <div class="main_content">
+
                      <form  action="includes/login.inc.php" method="post">
                        Username:<input type="text" name="username" value=""> <br>
                        Password:<input type="password" name="pass" value=""> <br>
                        <input type="submit" name="login-submit" value="Submit">
                      </form>
+                     <br><br><br><hr><br>
+                    <h2>Admin Log in</h2>
+                    <form action="includes/login.inc.php" method="post">
+                      Username: <input type="text" name="adminusername" value=""><br>
+                      Password: <input type="password" name="adminpassword" value=""><br>
+                      <input type="submit" name="adminlogin-submit" value="Submit">
+                    </form>
                        <div class="f_title">
 
                       </div>

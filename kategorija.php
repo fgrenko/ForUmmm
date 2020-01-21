@@ -1,4 +1,6 @@
 <?php
+session_start();
+error_reporting(0);
 $category = $_GET['category'];
 $display_category = ucfirst($category);
 $display_category= str_replace('_',' ',$display_category);
@@ -11,11 +13,13 @@ $display_category=str_replace('Skola', 'Škola',$display_category);
 <html lang="en" dir="ltr">
 
 <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" type="text/css" href="./assets/css/header.css">
     <link rel="stylesheet" href="./assets/css/styles.css">
+
     <script type="text/javascript">
     function home(){
       window.location.replace("index.php");
@@ -23,7 +27,6 @@ $display_category=str_replace('Skola', 'Škola',$display_category);
     function politika(){
       window.location.replace("politika.php");
     }
-
 
     </script>
 
@@ -72,11 +75,20 @@ $display_category=str_replace('Skola', 'Škola',$display_category);
                    <div class="main_content">
                      <?php
                      require 'includes/dbconnect.inc.php';
+                     $alert = $_GET['alert'];
+
+                     if($alert=='ispisi'){
+                      echo"<script> alert('Pitanje je izbrisano')</script>";
+                       $alert='false';
+                     }else if($alert=='ispisi1'){
+                       echo"<script> alert('Pitanje je premješteno')</script>";
+                     }
                      $query = "SELECT naslov,id FROM $category";
 
                      $result = mysqli_query($conn, $query);
                      while ($row = $result->fetch_assoc()) {
-                       echo "<a href='pitanje.php?category=".$category."&id=".$row['id']."'>".$row['naslov']."</a>  <br>";
+                       echo "<a href='pitanje.php?category=".$category."&id=".$row['id']."'>".$row['naslov']."</a> <br>";
+
                      }
                       ?>
                        <div class="f_title">
