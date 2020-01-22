@@ -65,6 +65,6 @@ else{
   }
 }
 }
-
+  
 header("Location: ../signedup.php");
 exit();

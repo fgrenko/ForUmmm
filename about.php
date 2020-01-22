@@ -18,12 +18,11 @@
 
 <body>
 <header>
-     <a href="index.php" style="color:black;">    <h1 class="logo">ForUmmm</h1> </a>
+     <a href="index.php" style="color:black;">   <h1 class="logo">ForUmmm</h1> </a>
      <input type="checkbox" id="nav-toggle" class="nav-toggle">
      <nav>
           <ul>
                <li><a href="index.php">Home</a></li>
-               <li><a href="about.php">About</a></li>
                <li><a href="#">Search</a></li>
                <?php
                if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
@@ -57,7 +56,7 @@
               <div class="content_header">
                   <!-- questionable class name?? -->
                   <div class="current_page">
-                       <a  href="#"><h1></h1></a>
+                       <a  href="#"><h1>O nama</h1></a>
                        <!-- after entering any page, display that same page; e.g. ForUmmm > News > World > ..... -->
                        <!-- look up "dl" tag for html on google -->
                   </div>

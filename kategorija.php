@@ -20,16 +20,6 @@ $display_category=str_replace('Skola', 'Škola',$display_category);
     <link rel="stylesheet" type="text/css" href="./assets/css/header.css">
     <link rel="stylesheet" href="./assets/css/styles.css">
 
-    <script type="text/javascript">
-    function home(){
-      window.location.replace("index.php");
-    }
-    function politika(){
-      window.location.replace("politika.php");
-    }
-
-    </script>
-
     <title>ForUmmm</title>
 </head>
 
@@ -37,14 +27,28 @@ $display_category=str_replace('Skola', 'Škola',$display_category);
 
 <body>
 <header>
-     <a href="#" onclick="home();" style="color:black;">   <h1 class="logo">ForUmmm</h1> </a>
+     <a href="index.php"  style="color:black;">   <h1 class="logo">ForUmmm</h1> </a>
      <input type="checkbox" id="nav-toggle" class="nav-toggle">
      <nav>
           <ul>
-               <li><a href="#" onclick="home();">Home</a></li>
-               <li><a href="#">About</a></li>
+               <li><a href="index.php">Home</a></li>
+               <li><a href="about.php">About</a></li>
                <li><a href="#">Search</a></li>
-               <li><a href="#">Sign In</a></li>
+               <?php
+               if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+                 echo "<li><a href='signup.php'>Sign Up</a></li>
+                 <li><a href='login.php'>Log In</a></li>";
+               }else {
+                 $username = $_SESSION["username"];
+
+                 echo "<li>Dobrodošli, ".$username;
+                 echo "<li><a href='account.php'>Moj Profil</a> ";
+                 echo "<li><a href='logout.php'>Log Out</a></li>";
+               }
+
+
+
+                ?>
 
           </ul>
      </nav>

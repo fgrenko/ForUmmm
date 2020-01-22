@@ -7,12 +7,7 @@
 
     <link rel="stylesheet" type="text/css" href="./assets/css/header.css">
     <link rel="stylesheet" href="./assets/css/styles.css">
-    <script type="text/javascript">
-    function home(){
-      window.location.replace("index.php");
-    }
 
-    </script>
 
     <title>ForUmmm</title>
 </head>
@@ -21,14 +16,14 @@
 
 <body>
 <header>
-     <a href="#" onclick="home();" style="color:black;">   <h1 class="logo">ForUmmm</h1> </a>
+     <a href="index.php" style="color:black;">   <h1 class="logo">ForUmmm</h1> </a>
      <input type="checkbox" id="nav-toggle" class="nav-toggle">
      <nav>
           <ul>
-               <li><a href="#" onclick="home();">Home</a></li>
-               <li><a href="#">About</a></li>
+               <li><a href="index.php">Home</a></li>
+               <li><a href="about.php">About</a></li>
                <li><a href="#">Search</a></li>
-               <li><a href="#">Sign In</a></li>
+               
 
           </ul>
      </nav>

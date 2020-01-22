@@ -20,14 +20,28 @@
   <?php
   header( "refresh:5;url=index.php" ); ?>
 <header>
-     <a href="#" onclick="home();" style="color:black;">   <h1 class="logo">ForUmmm</h1> </a>
+     <a href="index.php" style="color:black;">    <h1 class="logo">ForUmmm</h1> </a>
      <input type="checkbox" id="nav-toggle" class="nav-toggle">
      <nav>
           <ul>
-               <li><a href="#" onclick="home();">Home</a></li>
-               <li><a href="#">About</a></li>
+               <li><a href="index.php">Home</a></li>
+               <li><a href="about.php">About</a></li>
                <li><a href="#">Search</a></li>
-               <li><a href="#">Sign In</a></li>
+               <?php
+               if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+                 echo "<li><a href='signup.php'>Sign Up</a></li>
+                 <li><a href='login.php'>Log In</a></li>";
+               }else {
+                 $username = $_SESSION["username"];
+
+                 echo "<li>Dobrodošli, ".$username;
+                 echo "<li><a href='account.php'>Moj Profil</a> ";
+                 echo "<li><a href='logout.php'>Log Out</a></li>";
+               }
+
+
+
+                ?>  
 
           </ul>
      </nav>
