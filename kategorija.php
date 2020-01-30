@@ -1,62 +1,15 @@
 <?php
-session_start();
 error_reporting(0);
 $category = $_GET['category'];
 $display_category = ucfirst($category);
 $display_category= str_replace('_',' ',$display_category);
 $display_category=str_replace('zivot','život',$display_category );
 $display_category=str_replace('Skola', 'Škola',$display_category);
+  include("header.php");
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="stylesheet" type="text/css" href="./assets/css/header.css">
-    <link rel="stylesheet" href="./assets/css/styles.css">
-
-    <title>ForUmmm</title>
-</head>
-
-<!-- HEADER -->
-
-<body>
-<header>
-     <a href="index.php"  style="color:black;">   <h1 class="logo">ForUmmm</h1> </a>
-     <input type="checkbox" id="nav-toggle" class="nav-toggle">
-     <nav>
-          <ul>
-               <li><a href="index.php">Home</a></li>
-               <li><a href="about.php">About</a></li>
-               <li><a href="#">Search</a></li>
-               <?php
-               if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-                 echo "<li><a href='signup.php'>Sign Up</a></li>
-                 <li><a href='login.php'>Log In</a></li>";
-               }else {
-                 $username = $_SESSION["username"];
-
-                 echo "<li>Dobrodošli, ".$username;
-                 echo "<li><a href='account.php'>Moj Profil</a> ";
-                 echo "<li><a href='logout.php'>Log Out</a></li>";
-               }
-
-
-
-                ?>
-
-          </ul>
-     </nav>
-     <label for="nav-toggle" class="nav-toggle-label">
-          <span></span>
-     </label>
-</header>
-
 <!-- FORUM -->
 
     <div class="forum">
@@ -87,13 +40,38 @@ $display_category=str_replace('Skola', 'Škola',$display_category);
                      }else if($alert=='ispisi1'){
                        echo"<script> alert('Pitanje je premješteno')</script>";
                      }
-                     $query = "SELECT naslov,id FROM $category";
+                     $query = "SELECT naslov,id,username FROM $category WHERE  komentar IS NULL";
 
                      $result = mysqli_query($conn, $query);
+                     echo "<TABLE border=1>";
+	                     echo "<TR>";
+	                     echo "<TD> Naziv teme </TD>";
+	                     echo "<TD> Autor </TD>";
+	                     echo "<TD> Broj komentara </TD>";
+	                     echo "<TD> Vrijeme zadnje aktivnosti </TD>";
+	                     echo "</TR>";
+	                        $query2 = "SELECT date_time, postId FROM $category WHERE komentar IS NOT NULL GROUP BY postId";
+	                        $result2 = mysqli_query($conn, $query2);
                      while ($row = $result->fetch_assoc()) {
-                       echo "<a href='pitanje.php?category=".$category."&id=".$row['id']."'>".$row['naslov']."</a> <br>";
+                       $var = $row['id'];
 
-                     }
+	                        $query1 = "SELECT COUNT(*) FROM $category WHERE postId = $var";
+	                        $result1 = mysqli_query($conn, $query1);
+	                        $row1 = $result1->fetch_assoc();
+
+	                        $row2 = $result2->fetch_assoc();
+
+	                        echo "<TR>";
+	                          echo "<TD>". "<a href='pitanje.php?category=".$category."&id=".$row['id']."'>".$row['naslov']."</a>" ."</TD>";
+	                          echo "<TD>". $row['username'] ."</TD>";
+	                          echo "<TD>" . $row1['COUNT(*)'] . "</TD>";
+	                          echo "<TD>" . $row2['date_time'] . "</TD>";
+	                        echo "</TR>";
+	                     }
+	                     echo "</TABLE>";
+
+
+                     
                       ?>
                        <div class="f_title">
 
@@ -106,6 +84,9 @@ $display_category=str_replace('Skola', 'Škola',$display_category);
                   </div>
              </div>
          </div>
+    </div>
+    <div class="footer">
+      © RWA Projekt, Srića, Grenko, Veršić
     </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

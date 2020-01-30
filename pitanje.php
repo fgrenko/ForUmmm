@@ -1,55 +1,14 @@
+<?php
+  include("header.php");
 
+  $briskom = $_GET['alert'];
+  if($briskom == 'da'){
+    echo "<script> alert('Vaš komentar je izbrisan.') </script>";
+  }
+?>
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="stylesheet" type="text/css" href="./assets/css/header.css">
-    <link rel="stylesheet" href="./assets/css/styles.css">
-    <script type="text/javascript">
-
-    </script>
-
-    <title>ForUmmm</title>
-</head>
-
-<!-- HEADER -->
-
-<body>
-<header>
-     <a href="index.php" style="color:black;">    <h1 class="logo">ForUmmm</h1> </a>
-     <input type="checkbox" id="nav-toggle" class="nav-toggle">
-     <nav>
-          <ul>
-               <li><a href="index.php">Home</a></li>
-               <li><a href="about.php">About</a></li>
-               <li><a href="#">Search</a></li>
-               <?php
-               if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-                 echo "<li><a href='signup.php'>Sign Up</a></li>
-                 <li><a href='login.php'>Log In</a></li>";
-               }else {
-                 $username = $_SESSION["username"];
-
-                 echo "<li>Dobrodošli, ".$username;
-                 echo "<li><a href='account.php'>Moj Profil</a> ";
-                 echo "<li><a href='logout.php'>Log Out</a></li>";
-               }
-
-
-
-                ?>
-
-          </ul>
-     </nav>
-     <label for="nav-toggle" class="nav-toggle-label">
-          <span></span>
-     </label>
-</header>
-
 <!-- FORUM -->
 
     <div class="forum">
@@ -86,11 +45,19 @@
                        echo "<option value='sport'>Sport</option>";
                        echo "<option value='svakodnevni_zivot'>Svakodnevni život</option>";
                        echo "<option value='skola'>Škola</option>";
+                       echo "<option value='automobili'>Automobili</option>";
+                       echo "<option value='filozofija'>Filozofija</option>";
+                       echo "<option value='hrana_i_recepti'>Hrana i Recepti</option>";
+                       echo "<option value='humor'>Humor</option>";
+                       echo "<option value='kupnja'>Kupnja</option>";
+                       echo "<option value='prijedlozi_pohvale_kritike'>Prijedlozi,pohvale i kritike</option>";
+                       echo "<option value='prodaja'>Prodaja</option>";
+                       echo "<option value='religija'>Religija</option>";
                        echo "</select>          ";
                        echo "<input type='submit' name='premjesti-submit' value='Premjesti'>";
-                       echo "<input type='hidden' name='id' value='".$id."'>";
-                       echo "<input type='hidden' name='category' value=".$category.">";
-                       echo "</form>";
+                         echo "<input type='hidden' name='id' value='".$id."'>";
+                         echo "<input type='hidden' name='category' value=".$category.">";
+                         echo "</form>";
 
                      }
 
@@ -115,7 +82,12 @@
                      $result = mysqli_query($conn,$query);
 
                      while($row = $result->fetch_assoc()){
-                       echo "<tr><td style='background-color:grey;'>".$row['post']."<br><br> <div alight=right>Posted by user: <i>".$row['username']." </i><em>,  ".$row['date_time']."</em>  </div></td></tr>";
+                       echo "<tr><td style='background-color:grey;'>".$row['post']."<br><br> <div alight=right>Posted by user: <i>".$row['username']." </i><em>,  ".$row['date_time']."</em>  </div></td>";
+                       if($row['username'] == $_SESSION['username']){
+                         echo "<td> <a href='includes/izbrisikomentar.inc.php?category=".$category."&postId=".$row['postId']."&id=".$row['id']."'> <img src='assets/images/kanta.png' style='height:30px;width:30px'> </a> </td>";
+                       }else if($_SESSION['adminloggedin']== true){
+                          echo "<td> <a href='includes/izbrisikomentar.inc.php?category=".$category."&postId=".$row['postId']."&id=".$row['id']."'> <img src='assets/images/kanta.png' style='height:30px;width:30px'> </a> </td>";
+                       }
                      }
                      echo "</table><hr>";
 
@@ -148,6 +120,9 @@
                   </div>
              </div>
          </div>
+    </div>
+    <div class="footer">
+      © RWA Projekt, Srića, Grenko, Veršić
     </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

@@ -1,76 +1,79 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
+<?php
+  include("header.php");
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="stylesheet" type="text/css" href="./assets/css/header.css">
-    <link rel="stylesheet" href="./assets/css/styles.css">
+  $error = $_GET['error'];
 
 
-    <title>ForUmmm</title>
-</head>
 
-<!-- HEADER -->
+  if($error == 1){
+    echo "<script>alert('Morate popuniti sva polja!') </script>";
 
-<body>
-<header>
-     <a href="index.php" style="color:black;">   <h1 class="logo">ForUmmm</h1> </a>
-     <input type="checkbox" id="nav-toggle" class="nav-toggle">
-     <nav>
-          <ul>
-               <li><a href="index.php">Home</a></li>
-               <li><a href="about.php">About</a></li>
-               <li><a href="#">Search</a></li>
-               
-
-          </ul>
-     </nav>
-     <label for="nav-toggle" class="nav-toggle-label">
-          <span></span>
-     </label>
-</header>
+  }
+  if($error == 2){
+    echo "<script> alert('E-mail i username koji ste unijeli nije ispravan. Username se mora isključivo sastojati od alfanumeričkih znakova i e-mail mora biti ispravan!') </script>";
+  }
+  if ($error == 3) {
+      echo "<script> alert('E-mail koji ste unijeli nije ispravan. Unesite ispravnu e-mail adresu!') </script>";
+  }
+  if($error == 4){
+      echo "<script> alert('Username koji ste unijeli nije ispravan. Username se mora sastojati od isključivo alfanumeričkih znakova!') </script>";
+  }
+  if($error == 5){
+      echo "<script> alert('Lozinke se ne podudaraju!') </script>";
+  }
+?>
 
 <!-- FORUM -->
+    <div class="rect">
+         <div class="high_rect">
+              <div class="form_rect_hi">
+                   <form class='sign_form' id="submit" action="includes/signup.inc.php" method="post">
+                        <h1 class='form_title'>REGISTRACIJA</h1>
+                   <div class="group">
+                     <input class="input" type="text" name="username">
+                     <span class="bar"></span>
+                     <label class="label">Korisničko ime</label>
+                   </div>
 
-    <div class="forum">
+                   <div class="group">
+                     <input class="input" type="text"  name="email">
+                     <span class="bar"></span>
+                     <label class="label">Email</label>
+                   </div>
 
+                   <div class="group">
+                     <input class="input" type="password" name="pass">
+                     <span class="bar"></span>
+                     <label class="label">Lozinka</label>
+                   </div>
 
-         <div class="f_middle">
-              <div class="content_header">
-                  <!-- questionable class name?? -->
-                  <div class="current_page">
-                       <a  href="#"><h1>Sign up</h1></a>
-                       <!-- after entering any page, display that same page; e.g. ForUmmm > News > World > ..... -->
-                       <!-- look up "dl" tag for html on google -->
-                  </div>
-                  <div class="search">
-                       <a  href="#">Pretraga 🔍</a>
-                       <!-- text-box appears from 'pretraga' to the left and 'Pretraga 🔍' changes into only 🔍  (&#x1F50D)-->
-                  </div>
-             </div>
-              <div class="f_content">
-                   <div class="main_content">
-                     <form  action="includes/signup.inc.php" method="post">
-                       Username:<input type="text" name="username"> <br>
-                       Email:<input type="text" name="email"> <br>
-                       Password:<input type="password" name="pass"> <br>
-                       Repeat password:<input type="password" name="pass-rpt"> <br>
-                       <input type="submit" name="su-submit" value="Submit">
+                   <div class="group">
+                     <input class="input" type="password" name="pass-rpt">
+                     <span class="bar"></span>
+                     <label class="label">Ponovi lozinku</label>
+                   </div>
 
-                     </form>
-                       <div class="f_title">
+                   <button id="submit_button" class="submit_button" type="submit" name="su-submit">REGISTRIRAJ SE</button>
 
-                      </div>
-                      <!-- forum layout starts here -->
-                      <!-- if its okay w you  -->
-                  </div>
-                  <div class="side_menu">
-                       <!-- just a suggestion (i saw it on bug.hr) -->
-                  </div>
-             </div>
+                  <script type="text/javascript">
+                         var form = document.getElementById("submit");
+
+                         document.getElementById("submit_button").addEventListener("click", function () {
+                              form.submit();
+                         });
+                         console.log('gotovo');
+                  </script>
+
+                 </form>
+              </div>
          </div>
+         <div class="low_rect">
+              <div class="form_rect_lo_signup">
+              </div>
+         </div>
+    </div>
+    <div class="footer">
+      © RWA Projekt, Srića, Grenko, Veršić
     </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
