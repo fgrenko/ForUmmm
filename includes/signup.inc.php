@@ -1,5 +1,7 @@
 <?php
 
+
+
 if (isset($_POST['su-submit'])) {
   require 'dbconnect.inc.php';
 
@@ -9,27 +11,27 @@ if (isset($_POST['su-submit'])) {
   $passwordRepeat = $_POST["pass-rpt"];
 
   if (empty($username) || empty($email) || empty($password) || empty($passwordRepeat)) {
-header("Location: ../signup.php?error=emptyfields&uid=".$username."&mail=".$email);
+header("Location: ../signup.php?error=1");
 exit();
 // provjera ako je ijedno polje prazno
 }
 else if (!filter_var($email, FILTER_VALIDATE_EMAIL) && !preg_match("/^[a-zA-Z0-9]*$/", $username)) {
-header("Location: ../signup.php?error=invalidmailuid");
+header("Location: ../signup.php?error=2");
 exit();
 //provjera ako nije upisan dobar mail niti dobar username --> vraća te na signup.php bez da  sprema podatke koji su već unešeni
 }
 else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-header("Location: ../signup.php?error=invalidmail&uid=".$username);
+header("Location: ../signup.php?error=3");
 exit();
 //provjerava je li upisan valjan email, ako nije vraca na signup i sprema username
 }
 else if(!preg_match("/^[a-zA-Z0-9]*$/", $username)){
-header("Location: ../signup.php?error=invaliduid&mail=".$email);
+header("Location: ../signup.php?error=4");
 exit();
 //provjerava je li upisan dobar username, ako nije vraca na signup i sprema email
 }
 elseif ($password !== $passwordRepeat) {
-header("Location: ../signup.php?error=passwordcheck&mail=".$email."&uid=".$email);
+header("Location: ../signup.php?error=5");
 exit();
 //provjera jel provjera lozike uspjela, ako nije vraca na signup sa spremljenim podacima
 }
@@ -65,6 +67,10 @@ else{
   }
 }
 }
-  
-header("Location: ../signedup.php");
+session_start();
+$_SESSION["loggedin"] = true;
+$_SESSION["id"] = $id;
+$_SESSION["username"] = $username;
+header("Location: ../index.php?signed=true");
+
 exit();

@@ -1,0 +1,20 @@
+.submit_button {
+  --color: #8fc866;
+  --hover: #66c887;
+  background: none;
+ border: 2px solid;
+ font: inherit;
+ line-height: 1;
+ margin: 0.5em;
+ padding: 1em 2em;
+ color: var(--color);
+ transition: 0.25s;
+}
+.submit_button:hover, .submit_button:focus {
+  border-color: var(--hover);
+  color: #fff;
+}
+.submit_button:hover,
+.submit_button:focus {
+  box-shadow: inset 6.5em 0 0 0 var(--hover);
+}

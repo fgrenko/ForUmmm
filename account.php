@@ -25,7 +25,7 @@ session_start(); ?>
           <ul>
                <li><a href="index.php">Home</a></li>
                <li><a href="about.php">About</a></li>
-               <li><a href="#">Search</a></li>
+               <li><a href="search.php">Search</a></li>
                <?php
                if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                  echo "<li><a href='signup.php'>Sign Up</a></li>
@@ -70,11 +70,42 @@ session_start(); ?>
              </div>
               <div class="f_content">
                    <div class="main_content">
-                     <table>
-                       <tr>
-                         <td><h2>Moja pitanja i komentari</h2></td>
-                       </tr>
+                     <div>
+                       <form  action="includes/deaktiviraj.inc.php" method="post">
+                         <button type="submit" name="deaktiviraj" style="font-size:20px;color:black;background-color:#fc0328"> <b> Deaktiviraj profil </b> <img src='assets/images/deakt.png' height="30" width="30"> </button>
+
+                       </form>
+
+
+                     </div>
+
+                         <h2>Moja pitanja</h2>
+
                        <?php
+
+                       require 'includes/dbconnect.inc.php';
+                       $kontrola = 0;
+                       $kategorije = array("automobili","filozofija","hrana_i_recepti","humor","kupnja","politika","prijedlozi_pohvale_kritike","prodaja","religija","skola","sport","svakodnevni_zivot");
+                       echo "<table border='1'> <tr> <th>Pitanje </th> <th>Kategorija </th> </tr>";
+                       $username = $_SESSION['username'];
+                       for($i=0;$i<count($kategorije);$i++){
+                          $query =mysqli_query($conn,"SELECT * FROM $kategorije[$i] WHERE username = '$username' AND komentar IS NULL");
+                          if(mysqli_num_rows($query) > 0){
+                            $kontrola = 1;
+                            while($row = mysqli_fetch_array($query)){
+                              echo "<tr> <td>";
+                              echo "<a href='pitanje.php?category=".$kategorije[$i]."&id=".$row['id']."'>".$row['naslov']."</a></td>";
+                              $ime = ucfirst($kategorije[$i]);
+                              echo "<td>".$ime."</td>";
+                              echo " </tr>";
+                          }
+                          }
+                       }
+                        echo "</table>";
+                       if($kontrola !== 1){
+                         echo "Niste postavili pitanje. Pitanje možete postaviti <a href='novipost.php'><b>OVDJE</b></a>";
+                       }
+
 
                        ?>
                      </table>
@@ -89,6 +120,9 @@ session_start(); ?>
                   </div>
              </div>
          </div>
+    </div>
+    <div class="footer">
+      © RWA Projekt, Srića, Grenko, Veršić
     </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

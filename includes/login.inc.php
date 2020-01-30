@@ -26,13 +26,13 @@ if(isset($_POST['login-submit'])){
               $_SESSION["loggedin"] = true;
               $_SESSION["id"] = $id;
               $_SESSION["username"] = $username;
-              header("location: ../loggedin.php");
+              header("location: ../index.php?login=true");
             }else{
-              $password_error = "Lozinka koju ste unijeli se ne podudara sa korisničkim imenom";
+              header("location: ../login.php?error=1");
             }
           }
         }else{
-          $username_error = "Ne postoji korinik s tim korisničkim imenom";
+          header("location: ../login.php?error=2");
         }
       }else{
         echo "Nešto je pošlo po zlu.";
@@ -44,11 +44,11 @@ if(isset($_POST['login-submit'])){
 }
 elseif (isset($_POST['adminlogin-submit'])) {
   require 'dbconnect.inc.php';
-  $username =$_POST['adminusername'];
-  $password =$_POST['adminpassword'];
+  $username =$_POST['username'];
+  $password =$_POST['pass'];
 
   if (empty($username) || empty($password)) {
-  header("Location: ../index.php?error=emptyfields");
+  header("Location: ../index.php?error=emptyfieldsadmin");
   exit();
   }
   else {
@@ -67,13 +67,13 @@ elseif (isset($_POST['adminlogin-submit'])) {
               $_SESSION["loggedin"] = true;
               $_SESSION["id"] = $id;
               $_SESSION["username"] = $username;
-              header("location: ../loggedin.php");
+              header("location: ../index.php?login=true");
             }else{
-              $password_error = "Lozinka koju ste unijeli se ne podudara sa korisničkim imenom";
+              header("location: ../login.php?error=1");
             }
           }
         }else{
-          $username_error = "Ne postoji korinik s tim korisničkim imenom";
+          header("location: ../login.php?error=2");
         }
       }else{
         echo "Nešto je pošlo po zlu.";
